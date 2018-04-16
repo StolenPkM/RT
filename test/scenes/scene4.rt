@@ -1,0 +1,120 @@
+width: 800
+height: 600
+recursivity: 10
+antialias: 2
+diaphragm: 110.0
+camera:
+	x: 0.0
+	y: 20.0
+	z: -40.0
+	angle_x: -20.0
+	angle_y: 0.0
+	angle_z: 0.0
+cylinder:
+	x: 10.0
+	y: 0.0
+	z: -5.0
+	rotX: 1.000000
+	rotY: 1.000000
+	rotZ: 45.000000
+	radius: 2.0
+	ambient: 0.00000
+	diffuse: 1.00000
+	specular: 1.0
+	reflection: 0.0000000
+	refraction: 0.00000000
+sphere:
+	x: 0.0
+	y: 0.0
+	z: 0.0
+	rotX: 1.000000
+	rotY: 1.000000
+	rotZ: 1.000000
+	radius: 2.0
+	ambient: 0.00000
+	diffuse: 1.00000
+	specular: 1.0
+	reflection: 0.0000000
+	refraction: 0.00000000
+plane:
+	x: 0.0
+	y: 2.0
+	z: 0.0
+	rotX: 0.0
+	rotY: 0.0
+	rotZ: 0.0
+	ambient: 0.0
+	diffuse: 1.000000
+	specular: 1.0
+	reflection: 0.10
+	refraction: 0.9800
+plane:
+	x: 10.0
+	y: 0.0
+	z: 0.0
+	rotX: 0.0
+	rotY: 0.0
+	rotZ: 90.0
+	ambient: 0.0
+	diffuse: 1.000000
+	specular: 1.0
+	reflection: 1.0
+	refraction: 0.00
+plane:
+	x: 0.0
+	y: 0.0
+	z: 10.0
+	rotX: -90.0
+	rotY: 0.0
+	rotZ: 0.0
+	ambient: 0.0
+	diffuse: 1.000000
+	specular: 1.0
+	reflection: 1.0
+	refraction: 0.00
+plane:
+	x: 0.0
+	y: 0.0
+	z: -50.0
+	rotX: 90.0
+	rotY: 0.0
+	rotZ: 0.0
+	ambient: 0.0
+	diffuse: 1.000000
+	specular: 1.0
+	reflection: 1.0
+	refraction: 0.00
+plane:
+	x: -10.0
+	y: 0.0
+	z: 0.0
+	rotX: 0.0
+	rotY: 0.0
+	rotZ: -90.0
+	ambient: 0.0
+	diffuse: 1.000000
+	specular: 1.0
+	reflection: 0.90
+	refraction: 0.00
+plane:
+	x: 0.0
+	y: -5.0
+	z: 0.0
+	rotX: 0.0
+	rotY: 0.0
+	rotZ: 0.0
+	ambient: 0.0
+	diffuse: 1.000000
+	specular: 1.0
+	reflection: 0.0
+	refraction: 0.00
+light:
+	x: 5.000000
+	y: 20.000000
+	z: 5.000000
+	intensity: 1000.00000
+light:
+	x: 0.000000
+	y: 20.000000
+	z: -10.000000
+	intensity: 1000.00000
