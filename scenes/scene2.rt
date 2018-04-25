@@ -8,7 +8,7 @@ ambientcolor: FFFFFF
 camera:
 	x: 0.0
 	y: 0.0
-	z: -30.0
+	z: -20.0
 	angle_x: 0.0
 	angle_y: 0.0
 	angle_z: 0.0
@@ -23,7 +23,6 @@ plane:
 	diffuse: 1.000000
 	specular: 1.0
 	reflection: 0.000000
-	texture: damier
 light:
 	x: 5.000000
 	y: 1.000000

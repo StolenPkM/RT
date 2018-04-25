@@ -6,14 +6,11 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 18:24:29 by gmachena          #+#    #+#             */
-/*   Updated: 2018/04/24 17:48:40 by adhanot          ###   ########.fr       */
+/*   Updated: 2018/04/25 18:49:43 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-int	g_x;
-int g_y;
 
 static double		ft_cos_a(t_thread *thr, t_light *light)
 {

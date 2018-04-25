@@ -2,71 +2,79 @@ width: 1600
 height: 1200
 recursivity: 1
 antialias: 2
-diaphragm: 110.00
-filter: negatif
+diaphragm: 90.00
+filter: none
 ambientcolor: FFFFFF
 camera:
 	x: 0.0
 	y: 0.0
-	z: -30.0
+	z: -50.0
 	angle_x: 0.0
 	angle_y: 0.0
 	angle_z: 0.0
-plane:
-	x: -5.0
-	y: -5.0
-	z: -20.0
-	rotX: -90.0
-	rotY: 0.0
-	rotZ: 0.0
-	ambient: 0.000
-	diffuse: 1.0
-	specular: 0.2
-	reflection: 0.0
-	refraction: 0.0
-	color: FFFF00
-	texture: textures/s_shutterstock_274090238.bmp
-cylinder:
-	x: 2.0
+sphere:
+	x: 0.0
 	y: 0.0
-	z: -15.0
-	rotX: 45.0
+	z: -45.0
+	rotX: 1.000000
+	rotY: 1.000000
+	rotZ: 1.000000
+	radius: 2.0
+	ambient: 0.000000
+	diffuse: 1.000000
+	specular: 2.200000
+	reflection: 0.000000
+	refraction: 0.000000
+	color: 0000FF
+	texture: 2.bmp
+	decal_w: 2000
+	decal_h: 2000
+cylinder:
+	x: -5.0
+	y: 0.0
+	z: -25.0
+	rotX: 0.0
 	rotY: 0.0
 	rotZ: 0.0
-	radius: 2.0
-	ambient: 1.00150
+	radius: 1.0
+	ambient: 0.0
 	diffuse: 1.0
 	specular: 1.0
 	reflection: 0.0
 	refraction: 0.0
+	color: 707070
+	texture: 2.bmp
 cone:
-	x: 0.0
-	y: 0.0
-	z: 0.0
-	rotX: 1.000000
-	rotY: 1.000000
-	rotZ: 45.000000
+	x: 5.0
+	y: 5.0
+	z: -20.0
+	rotX: 0.000000
+	rotY: 0.000000
+	rotZ: 0.000000
 	angle: 2.0
 	ambient: 0.00000
 	diffuse: 1.00000
 	specular: 1.0
 	reflection: 0.000000
 	refraction: 0.000000
-sphere:
-	x: 5.0
-	y: 0.0
-	z: -1.0
-	rotX: 90.000000
-	rotY: 1.000000
-	rotZ: 1.000000
-	radius: 1.0
-	ambient: 1.00000
-	diffuse: 1.00000
-	specular: 1.0
-	reflection: 0.00
-	refraction: 0.00
+	color: 00FF00
+	texture: 2.bmp
 light:
 	x: 0.000000
 	y: 0.000000
-	z: -30.000000
+	z: -50.000000
 	intensity: 1000.00000
+plane:
+	x: 0.0
+	y: 0.0
+	z: 10.0
+	rotX: -90.0
+	rotY: 0.0
+	rotZ: 0.0
+	ambient: 0.0
+	diffuse: 1.000000
+	specular: 1.0
+	reflection: 0.0000000
+	refraction: 0.0
+	color: ABCDEF
+	texture: 2.bmp

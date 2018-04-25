@@ -6,20 +6,17 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 14:52:38 by gmachena          #+#    #+#             */
-/*   Updated: 2018/04/25 12:11:39 by pabonnin         ###   ########.fr       */
+/*   Updated: 2018/04/25 18:54:39 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int					g_x;
-int					g_y;
-
-unsigned int		ft_calc_obj(t_thread *thr, int recursivity)
+unsigned int ft_calc_obj(t_thread *thr, int recursivity)
 {
-	double			obj[thr->e->objnb->totobj];
-	int				i;
-	int				j;
+	double	obj[thr->e->objnb->totobj];
+	int		i;
+	int		j;
 
 	j = 0;
 	i = 0;
@@ -51,12 +48,12 @@ unsigned int		ft_calc_obj(t_thread *thr, int recursivity)
 	return (ft_load_post(thr, i, obj[i]));
 }
 
-void				ft_calc_ray(int i, int j, t_thread *thr)
+void ft_calc_ray(int i, int j, t_thread *thr)
 {
-	double			x;
-	double			y;
-	double			z;
-	double			fov;
+	double x;
+	double y;
+	double z;
+	double fov;
 
 	fov = (thr->e->diaphragm * (M_PI / 180));
 	x = (i - (thr->WIN_X / 2.0));
@@ -67,19 +64,19 @@ void				ft_calc_ray(int i, int j, t_thread *thr)
 	thr->cam.angle = thr->e->camera->angle;
 }
 
-void				*thread_rt(void *arg)
+void *thread_rt(void *arg)
 {
-	int				i;
-	int				nbr_pxl;
-	t_thread		*thr;
+	int			i;
+	int			nbr_pxl;
+	t_thread	*thr;
 
 	thr = (t_thread *)arg;
 	i = thr->tid;
 	nbr_pxl = thr->WIN_X * thr->WIN_Y;
 	while (i < nbr_pxl)
 	{
-		g_x = (i % thr->WIN_X);
-		g_y = (i / thr->WIN_X);
+		thr->gx = (i % thr->WIN_X);
+		thr->gy = (i / thr->WIN_X);
 		thr->recursivity = thr->e->recursivity;
 		ft_calc_ray((i % thr->WIN_X), (i / thr->WIN_X), thr);
 		thr->color = ft_calc_obj(thr, thr->recursivity);
@@ -89,12 +86,12 @@ void				*thread_rt(void *arg)
 	pthread_exit(NULL);
 }
 
-void				ft_rt(t_env *e)
+void	ft_rt(t_env *e)
 {
-	pthread_t		thread[THREADS];
-	int				i;
-	int				rc;
-	t_thread		thr[THREADS];
+	pthread_t	thread[THREADS];
+	int			i;
+	int			rc;
+	t_thread	thr[THREADS];
 
 	i = -1;
 	e->rgb = malloc(sizeof(t_rgb*) * WIN_Y * WIN_X);
@@ -104,7 +101,7 @@ void				ft_rt(t_env *e)
 	while (++i < THREADS)
 	{
 		thr[i].tid = i;
-		thr[i].e = e;
+		thr[i].e = e; 
 		if ((rc = pthread_create(&thread[i], NULL, thread_rt, &thr[i])))
 			return ;
 	}
@@ -112,5 +109,5 @@ void				ft_rt(t_env *e)
 	while (++i < THREADS)
 		pthread_join(thread[i], NULL);
 	main_post_treatment(e);
-	SDL_RenderPresent(e->renderer);
+    SDL_RenderPresent(e->renderer);
 }

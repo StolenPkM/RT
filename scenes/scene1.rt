@@ -3,7 +3,7 @@ height: 1900
 recursivity: 4
 antialias: 2
 diaphragm: 90.00
-filter: sepia
+filter: none
 ambientcolor: 000000
 camera:
 	x: 0.0

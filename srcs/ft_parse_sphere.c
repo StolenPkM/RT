@@ -6,13 +6,13 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 14:46:06 by acoudray          #+#    #+#             */
-/*   Updated: 2018/04/24 18:16:17 by adhanot          ###   ########.fr       */
+/*   Updated: 2018/04/25 15:36:21 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_sphere			*ft_init_sphere(t_sphere *sphere)
+t_sphere		*ft_init_sphere(t_sphere *sphere)
 {
 	if (!(sphere = malloc(sizeof(t_sphere))))
 		ft_error("Error malloc'ing!");
@@ -22,12 +22,14 @@ t_sphere			*ft_init_sphere(t_sphere *sphere)
 	sphere->radius = 1.0;
 	sphere->color = 0xFF0000FF;
 	sphere->inter = 0;
+	sphere->decal_w = 0;
+	sphere->decal_h = 0;
 	return (sphere);
 }
 
-static int			ft_fill_properties(t_sphere *sphere, char *str)
+static int		ft_fill_properties(t_sphere *sphere, char *str)
 {
-	char			*tmp;
+	char	*tmp;
 
 	if (!(ft_strncmp(str, "\tradius: ", 9)))
 		sphere->radius = parse_double(tmp = ft_strrcpy(str, 9), 0.0, 20.0);
@@ -38,25 +40,30 @@ static int			ft_fill_properties(t_sphere *sphere, char *str)
 	else if (!(ft_strncmp(str, "\tdiffuse: ", 10)))
 		sphere->mat.diffuse = parse_double(tmp = ft_strrcpy(str, 10), 0.0, 1.0);
 	else if (!(ft_strncmp(str, "\tspecular: ", 11)))
-		sphere->mat.specular = \
-			parse_double(tmp = ft_strrcpy(str, 11), 0.0, 1.0);
+		sphere->mat.specular = parse_double(tmp = ft_strrcpy(str, 11), 0.0, 1.0);
 	else if (!(ft_strncmp(str, "\treflection: ", 13)))
-		sphere->mat.reflection = \
-			parse_double(tmp = ft_strrcpy(str, 13), 0.0, 1.0);
+		sphere->mat.reflection = parse_double(tmp = ft_strrcpy(str, 13), 0.0, 1.0);
 	else if (!(ft_strncmp(str, "\trefraction: ", 13)))
-		sphere->mat.refraction = \
-			parse_double(tmp = ft_strrcpy(str, 13), 0.0, 1.0);
+		sphere->mat.refraction = parse_double(tmp = ft_strrcpy(str, 13), 0.0, 1.0);
 	else if (!(ft_strncmp(str, "\ttexture: ", 10)))
+	{
 		sphere->proc = parse_texture(tmp = ft_strrcpy(str, 10), sphere->text);
+		if ((sphere->text = SDL_LoadBMP("./textures/3.bmp")))
+			sphere->proc = 4;
+	}
+	else if (!(ft_strncmp(str, "\tdecal_w: ", 10)))
+		sphere->decal_w = parse_double(tmp = ft_strrcpy(str, 10), 0.0, 1000.0);
+	else if (!(ft_strncmp(str, "\tdecal_h: ", 10)))
+		sphere->decal_h = parse_double(tmp = ft_strrcpy(str, 10), 0.0, 1000.0);
 	else
 		return (0);
 	free(tmp);
 	return (1);
 }
 
-static int			ft_fill_coords(t_sphere *sphere, char *str)
+static int		ft_fill_coords(t_sphere *sphere, char *str)
 {
-	char			*tmp;
+	char	*tmp;
 
 	if (!(ft_strncmp(str, "\tx: ", 4)))
 		sphere->pos.x = ft_atof(tmp = ft_strrcpy(str, 4));
@@ -80,19 +87,18 @@ static t_sphere		*ft_parse_properties(t_sphere *sphere, char *str)
 {
 	if (str && str[0] == '\t')
 	{
-		if ((!ft_fill_coords(sphere, str)) && \
-				(!ft_fill_properties(sphere, str)))
+		if ((!ft_fill_coords(sphere, str)) && (!ft_fill_properties(sphere, str)))
 			ft_error("Can't parse properties of an object");
 		return (sphere);
 	}
 	return (0);
 }
 
-int					ft_parse_sphere(t_env *e, char **tab)
+int		ft_parse_sphere(t_env *e, char **tab)
 {
-	int				i;
-	int				j;
-	int				insphere;
+	int		i;
+	int		j;
+	int		insphere;
 
 	i = -1;
 	j = -1;

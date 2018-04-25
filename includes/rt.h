@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 16:49:17 by gmachena          #+#    #+#             */
-/*   Updated: 2018/04/25 16:30:03 by pabonnin         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:59:48 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define WIN_X e->width
 # define WIN_Y e->height
-# define THREADS 128
+# define THREADS 1
 # define VIEWP e->camera->viewp
 # define POW2(x) (x * x)
 # define FOCALE 300
@@ -87,6 +87,8 @@ typedef	struct		s_sphere
 	int				proc;
 	SDL_Surface		*text;
 	t_mat			mat;
+	double			decal_w;
+	double			decal_h;
 }					t_sphere;
 
 typedef	struct		s_cylinder
@@ -184,10 +186,15 @@ typedef struct		s_thread
 	t_vect			internorm;
 	t_camera		cam;
 	t_env			*e;
+	double			decal_w;
+	double			decal_h;
 	int				x;
 	int				y;
+	int				gx;
+	int				gy;
 }					t_thread;
 
+unsigned int	ft_texture(t_thread *thr, SDL_Surface *text);
 int				parse_texture(char *str, SDL_Surface *text);
 void			main_post_treatment(t_env *e);
 unsigned int	parse_hexa(char *str);
@@ -243,6 +250,7 @@ void			rgb_addf(unsigned int *color, double d);
 unsigned int 	ft_calc_obj(t_thread *thr, int recursivity);
 int				parse_filter(char *str);
 double 			damier_trou(t_thread *thr);
+double 			damier_trou(t_thread *thr);
 void			applied_green(t_env *e);
 void			applied_red(t_env *e);
 void			applied_yellow(t_env *e);
@@ -255,4 +263,5 @@ void			sepia(t_rgb *v);
 void			negative(t_rgb *v);
 int				len_rgb(t_env *e);
 void			ft_export(t_env *e);
+void			ft_put_pixel_to_img(t_env *e, int x, int y, int i);
 #endif

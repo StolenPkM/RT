@@ -6,13 +6,13 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 16:15:43 by acoudray          #+#    #+#             */
-/*   Updated: 2018/04/24 17:52:40 by adhanot          ###   ########.fr       */
+/*   Updated: 2018/02/22 13:26:04 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_camera			*ft_init_camera(t_camera *camera)
+t_camera		*ft_init_camera(t_camera *camera)
 {
 	if (!(camera = malloc(sizeof(t_camera))))
 		ft_error("Error malloc'ing!");
@@ -22,9 +22,9 @@ t_camera			*ft_init_camera(t_camera *camera)
 	return (camera);
 }
 
-static int			ft_fill_coords(t_camera *camera, char *str)
+static int		ft_fill_coords(t_camera *camera, char *str)
 {
-	char			*tmp;
+	char	*tmp;
 
 	if (!(ft_strncmp(str, "\tx: ", 4)))
 		camera->pos.x = ft_atof(tmp = ft_strrcpy(str, 4));
@@ -55,10 +55,10 @@ static t_camera		*ft_parse_properties(t_camera *camera, char *str)
 	return (0);
 }
 
-int					ft_parse_camera(t_env *e, char **tab)
+int		ft_parse_camera(t_env *e, char **tab)
 {
-	int				i;
-	int				incamera;
+	int		i;
+	int		incamera;
 
 	i = -1;
 	incamera = 0;

@@ -6,13 +6,13 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 19:32:56 by gmachena          #+#    #+#             */
-/*   Updated: 2018/04/25 11:55:40 by pabonnin         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:59:26 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void		ft_put_pixel_to_img(t_env *e, int x, int y, int i)
+void		ft_put_pixel_to_img(t_env *e, int x, int y, int i)
 {
 	SDL_SetRenderDrawColor(e->renderer, e->rgb[i]->r, e->rgb[i]->g, \
 			e->rgb[i]->b, 255);

@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 11:12:13 by acoudray          #+#    #+#             */
-/*   Updated: 2018/04/24 18:19:08 by adhanot          ###   ########.fr       */
+/*   Updated: 2018/02/22 13:43:46 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int			ft_is_shape_named(char *str1, char *str2)
 {
-	if (!ft_strcmp(str1, str2))
-		return (1);
-	else
-		return (0);
+    if (!ft_strcmp(str1, str2))
+        return (1);
+    else
+        return (0);
 }
 
 t_vect		*ft_parse_coords(t_vect *pos, char *str)

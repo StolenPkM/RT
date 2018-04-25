@@ -6,13 +6,13 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 12:21:31 by acoudray          #+#    #+#             */
-/*   Updated: 2018/04/24 18:06:12 by adhanot          ###   ########.fr       */
+/*   Updated: 2018/03/16 14:26:46 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_light				*ft_init_light(t_light *light)
+t_light		*ft_init_light(t_light *light)
 {
 	if (!(light = malloc(sizeof(t_light))))
 		ft_error("Error malloc'ing!");
@@ -22,22 +22,23 @@ t_light				*ft_init_light(t_light *light)
 	return (light);
 }
 
-static int			ft_fill_properties(t_light *light, char *str)
+static int		ft_fill_properties(t_light *light, char *str)
 {
-	char			*tmp;
+	char	*tmp;
 
 	if (!(ft_strncmp(str, "\tintensity: ", 12)))
-		light->intensity = \
-			parse_double(tmp = ft_strrcpy(str, 12), 0.0, 1000000.0);
+		light->intensity = parse_double(tmp = ft_strrcpy(str, 12), 0.0, 1000000.0);
+	/*else if (!(ft_strncmp(str, "\tcolor: ", 8)))
+		light->color = 0xFFFFFF;// AJOUTER STRTOL*/
 	else
 		return (0);
 	free(tmp);
 	return (1);
 }
 
-static int			ft_fill_coords(t_light *light, char *str)
+static int		ft_fill_coords(t_light *light, char *str)
 {
-	char			*tmp;
+	char	*tmp;
 
 	if (!(ft_strncmp(str, "\tx: ", 4)))
 		light->pos.x = ft_atof(tmp = ft_strrcpy(str, 4));
@@ -62,11 +63,11 @@ static t_light		*ft_parse_properties(t_light *light, char *str)
 	return (0);
 }
 
-int					ft_parse_light(t_env *e, char **tab)
+int		ft_parse_light(t_env *e, char **tab)
 {
-	int				i;
-	int				j;
-	int				inlight;
+	int		i;
+	int		j;
+	int		inlight;
 
 	i = -1;
 	j = -1;

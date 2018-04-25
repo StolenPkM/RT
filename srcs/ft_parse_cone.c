@@ -6,13 +6,13 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 12:41:39 by acoudray          #+#    #+#             */
-/*   Updated: 2018/04/24 17:58:40 by adhanot          ###   ########.fr       */
+/*   Updated: 2018/04/25 15:36:43 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_cone			*ft_init_cone(t_cone *cone)
+t_cone		*ft_init_cone(t_cone *cone)
 {
 	if (!(cone = malloc(sizeof(t_cone))))
 		ft_error("Error malloc'ing!");
@@ -27,7 +27,7 @@ t_cone			*ft_init_cone(t_cone *cone)
 
 static int		ft_fill_properties(t_cone *cone, char *str)
 {
-	char		*tmp;
+	char	*tmp;
 
 	if (!(ft_strncmp(str, "\tangle: ", 8)))
 		cone->angle = ft_atof(tmp = ft_strrcpy(str, 8));
@@ -40,13 +40,15 @@ static int		ft_fill_properties(t_cone *cone, char *str)
 	else if (!(ft_strncmp(str, "\tspecular: ", 11)))
 		cone->mat.specular = parse_double(tmp = ft_strrcpy(str, 11), 0.0, 1.0);
 	else if (!(ft_strncmp(str, "\treflection: ", 13)))
-		cone->mat.reflection = parse_double(tmp = \
-				ft_strrcpy(str, 13), 0.0, 1.0);
+		cone->mat.reflection = parse_double(tmp = ft_strrcpy(str, 13), 0.0, 1.0);
 	else if (!(ft_strncmp(str, "\trefraction: ", 13)))
-		cone->mat.refraction = parse_double(tmp = \
-				ft_strrcpy(str, 13), 0.0, 1.0);
+		cone->mat.refraction = parse_double(tmp = ft_strrcpy(str, 13), 0.0, 1.0);
 	else if (!(ft_strncmp(str, "\ttexture: ", 10)))
+	{
 		cone->proc = parse_texture(tmp = ft_strrcpy(str, 10), cone->text);
+		if ((cone->text = SDL_LoadBMP("./textures/3.bmp")))
+			cone->proc = 4;
+	}
 	else
 		return (0);
 	free(tmp);
@@ -55,7 +57,7 @@ static int		ft_fill_properties(t_cone *cone, char *str)
 
 static int		ft_fill_coords(t_cone *cone, char *str)
 {
-	char		*tmp;
+	char	*tmp;
 
 	if (!(ft_strncmp(str, "\tx: ", 4)))
 		cone->pos.x = ft_atof(tmp = ft_strrcpy(str, 4));
@@ -75,7 +77,7 @@ static int		ft_fill_coords(t_cone *cone, char *str)
 	return (1);
 }
 
-static t_cone	*ft_parse_properties(t_cone *cone, char *str)
+static t_cone		*ft_parse_properties(t_cone *cone, char *str)
 {
 	if (str && str[0] == '\t')
 	{
@@ -86,11 +88,11 @@ static t_cone	*ft_parse_properties(t_cone *cone, char *str)
 	return (0);
 }
 
-int				ft_parse_cone(t_env *e, char **tab)
+int		ft_parse_cone(t_env *e, char **tab)
 {
-	int			i;
-	int			j;
-	int			incone;
+	int		i;
+	int		j;
+	int		incone;
 
 	i = -1;
 	j = -1;

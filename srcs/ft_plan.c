@@ -6,19 +6,23 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:02:36 by gmachena          #+#    #+#             */
-/*   Updated: 2018/04/24 18:23:36 by adhanot          ###   ########.fr       */
+/*   Updated: 2018/04/21 13:30:04 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			ft_save_inter_plan(t_thread *thr, \
-		t_plane *plane, t_camera *camera)
+int g_x;
+int g_y;
+
+void	ft_save_inter_plan(t_thread *thr, t_plane *plane, t_camera *camera)
 {
 	thr->internorm = coord_v(0, 1, 0);
 	thr->interpos = vectadd(camera->pos, vmult(camera->v, thr->value));
 	thr->internorm = vrotateinv(thr->internorm, plane->rotate);
+	//thr->internorm = normalize(thr->internorm);
 }
+
 
 void			ft_post_plane(t_thread *thr, unsigned int *tmp)
 {
@@ -35,13 +39,15 @@ void			ft_post_plane(t_thread *thr, unsigned int *tmp)
 		thr->mat.refraction = damier_trou(thr);
 		*tmp = thr->e->plane[i]->color;
 	}
+	else if (thr->e->plane[i]->proc == 4)
+		*tmp = ft_texture(thr, thr->e->plane[i]->text);
 	else
 		*tmp = thr->e->plane[i]->color;
 }
 
 static double	ft_calc_inter_plan(t_vect pos, t_vect vect)
 {
-	double		inter;
+	double inter;
 
 	inter = pos.y / vect.y;
 	inter = -inter;
@@ -52,9 +58,9 @@ static double	ft_calc_inter_plan(t_vect pos, t_vect vect)
 
 double			ft_calc_plan(t_plane *plane, t_camera *camera)
 {
-	t_vect		pos;
-	t_vect		vect;
-	double		inter;
+		t_vect pos;
+		t_vect vect;
+		double inter;
 
 		inter = 0;
 		pos = vrotate(vectsub(camera->pos, plane->pos), plane->rotate);

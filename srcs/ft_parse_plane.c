@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 12:37:22 by acoudray          #+#    #+#             */
-/*   Updated: 2018/04/25 12:42:35 by pabonnin         ###   ########.fr       */
+/*   Updated: 2018/04/25 15:35:57 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,23 @@ t_plane		*ft_init_plane(t_plane *plane)
 	return (plane);
 }
 
+//!!!!!!!!!!!!!SDL_Surface A FREE IMPERATIVEMENT!!!!!!!!!!!!!!!!
 int			parse_texture(char *str, SDL_Surface *text)
 {
+	(void)text;
 	if (!(ft_strncmp(str, "damier", 5)))
 		return (1);
 	else if (!(ft_strncmp(str, "trou", 4)))
 		return (2);
 	else if (!(ft_strncmp(str, "alea", 4)))
 		return (3);
-	else if ((text = SDL_LoadBMP(str)))
-	{
-		ft_putendl("coucou");
-		return (4);
-	}
 	else
 		return (0);
 }
 
 static int		ft_fill_properties(t_plane *plane, char *str)
 {
-	char		*tmp;
+	char	*tmp;
 
 	if (!(ft_strncmp(str, "\tambient: ", 10)))
 		plane->mat.ambient = parse_double(tmp = ft_strrcpy(str, 10), 0.0, 1.0);
@@ -55,13 +52,15 @@ static int		ft_fill_properties(t_plane *plane, char *str)
 	else if (!(ft_strncmp(str, "\tspecular: ", 11)))
 		plane->mat.specular = parse_double(tmp = ft_strrcpy(str, 11), 0.0, 1.0);
 	else if (!(ft_strncmp(str, "\treflection: ", 13)))
-		plane->mat.reflection = \
-			parse_double(tmp = ft_strrcpy(str, 13), 0.0, 1.0);
+		plane->mat.reflection = parse_double(tmp = ft_strrcpy(str, 13), 0.0, 1.0);
 	else if (!(ft_strncmp(str, "\trefraction: ", 13)))
-		plane->mat.refraction = \
-			parse_double(tmp = ft_strrcpy(str, 13), 0.0, 1.0);
+		plane->mat.refraction = parse_double(tmp = ft_strrcpy(str, 13), 0.0, 1.0);
 	else if (!(ft_strncmp(str, "\ttexture: ", 10)))
+	{
 		plane->proc = parse_texture(tmp = ft_strrcpy(str, 10), plane->text);
+		if ((plane->text = SDL_LoadBMP("./textures/3.bmp")))
+			plane->proc = 4;
+	}
 	else
 		return (0);
 	free(tmp);
@@ -70,7 +69,7 @@ static int		ft_fill_properties(t_plane *plane, char *str)
 
 static int		ft_fill_coords(t_plane *plane, char *str)
 {
-	char		*tmp;
+	char	*tmp;
 
 	if (!(ft_strncmp(str, "\tx: ", 4)))
 		plane->pos.x = ft_atof(tmp = ft_strrcpy(str, 4));
@@ -90,23 +89,22 @@ static int		ft_fill_coords(t_plane *plane, char *str)
 	return (1);
 }
 
-static t_plane	*ft_parse_properties(t_plane *plane, char *str)
+static t_plane		*ft_parse_properties(t_plane *plane, char *str)
 {
 	if (str && str[0] == '\t')
 	{
-		if (!(ft_fill_coords(plane, str)) && \
-				(!(ft_fill_properties(plane, str))))
+		if (!(ft_fill_coords(plane, str)) && (!(ft_fill_properties(plane, str))))
 			ft_error("Can't parse properties of an object");
 		return (plane);
 	}
 	return (0);
 }
 
-int				ft_parse_plane(t_env *e, char **tab)
+int		ft_parse_plane(t_env *e, char **tab)
 {
-	int			i;
-	int			j;
-	int			inplane;
+	int		i;
+	int		j;
+	int		inplane;
 
 	i = -1;
 	j = -1;

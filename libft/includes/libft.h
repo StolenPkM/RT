@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 16:32:51 by gmachena          #+#    #+#             */
-/*   Updated: 2018/03/22 16:57:45 by gmachena         ###   ########.fr       */
+/*   Updated: 2018/04/24 12:42:23 by phamelin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void			ft_putnbr_fd(int n, int fd);
 void			ft_putnbr(int n);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_strmap(char const *s, char (*f)(char));
-char			*ft_itoa(int n);
+char			*ft_itoa(unsigned int n);
 void			*ft_memmove(void *dst, void const *src, size_t n);
 char			*ft_strncat(char *dst, const char *src, size_t n);
 void			ft_putendl_fd(char const *s, int fd);

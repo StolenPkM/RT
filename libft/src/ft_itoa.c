@@ -3,47 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmachena <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: phamelin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/17 22:49:57 by gmachena          #+#    #+#             */
-/*   Updated: 2016/11/22 02:11:42 by gmachena         ###   ########.fr       */
+/*   Created: 2016/11/09 15:45:03 by phamelin          #+#    #+#             */
+/*   Updated: 2018/04/24 16:24:41 by phamelin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static size_t	countnb(int nb)
+char		*ft_itoa(unsigned int n)
 {
-	int i;
+	int		temp;
+	int		l;
+	char	*res;
 
-	i = 0;
-	while (nb /= 10)
-		i++;
-	return (i + 1);
-}
-
-char			*ft_itoa(int n)
-{
-	int		size;
-	char	*tab;
-	long	tmp;
-
-	tmp = n;
-	size = countnb(tmp);
-	if (tmp < 0)
+	temp = n;
+	l = 2;
+	while (temp /= 10)
+		l++;
+	if ((res = (char *)malloc(sizeof(char) * l)) == NULL)
+		return (NULL);
+	res[--l] = '\0';
+	while (l--)
 	{
-		tmp = -tmp;
-		size++;
+		res[l] = n % 10 + '0';
+		n = n / 10;
 	}
-	if (!(tab = (char *)malloc(sizeof(char) * size + 1)))
-		return (0);
-	tab[size] = 0;
-	tmp *= 10;
-	while (tmp /= 10)
-		tab[--size] = tmp % 10 + '0';
-	if (tmp >= 0)
-		tab[--size] = tmp + '0';
-	if (n < 0)
-		tab[0] = '-';
-	return (tab);
+	return (res);
 }

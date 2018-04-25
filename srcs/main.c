@@ -6,7 +6,7 @@
 /*   By: pabonnin <pabonnin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 12:01:04 by pabonnin          #+#    #+#             */
-/*   Updated: 2018/04/25 16:30:32 by pabonnin         ###   ########.fr       */
+/*   Updated: 2018/04/25 20:03:02 by pabonnin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			main(int ac, char **av)
 	{
 		e = init(av[1]);
 		ft_rt(e);
-		ft_export(e);
+	//	ft_export(e);
 		sdl_loop(e);
 	}
 	return (0);

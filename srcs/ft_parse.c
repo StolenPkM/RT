@@ -6,7 +6,7 @@
 /*   By: gmachena <gmachena@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 13:50:12 by acoudray          #+#    #+#             */
-/*   Updated: 2018/04/18 14:09:32 by gmachena         ###   ########.fr       */
+/*   Updated: 2018/04/23 16:50:39 by gmachena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ char		**ft_parse_file(t_env *e)
 		if (++i <= 6)
 		{
 			if (ft_parse_main_properties(e, line, i) == -1)
-			{
-				ft_putendl("olo");
 				ft_error("error parse main properties.");
-			}
 		}
 		else if (i > 6)
 		{
